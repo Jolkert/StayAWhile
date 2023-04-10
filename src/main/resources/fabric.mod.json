@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "stay_a_while",
+	"version": "${version}",
+	"name": "Stay A While",
+	"description": "Customize item despawn times!",
+	"authors": [
+		"Jolkert"
+	],
+	"contact": {
+		"website": "jolkert.github.io",
+		"repo": "https://github.com/Jolkert/StayAWhile"
+	},
+	"license": "MIT",
+	"icon": "assets/stay_a_while/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.jolkert.stayawhile.StayAWhile"
+		]
+	},
+	"mixins": [
+		"stay_a_while.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"fabric": "*",
+		"minecraft": "${minecraft_version}"
+	}
+}

@@ -1,0 +1,4 @@
+{
+	"gamerule.itemDespawnAge": "Ticks before items despawn",
+	"gamerule.deathItemDespawnAge": "Ticks before items dropped on death despawn"
+}

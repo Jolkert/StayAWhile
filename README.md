@@ -3,9 +3,10 @@ Have you ever thought that your items disappear to quickly? Or maybe you think i
 Whichever type of player you are, Stay A While is the mod for you
 
 # What does it do?
-Stay A While adds two gamerules
-* `deathItemDespawnAge` the amount of ticks an item that **was dropped by a player upon death** takes to despawn (default: 6000)
-* `itemDespawnAge` the amount of ticks all other dropped items take to despawn (default: 6000)
+Stay A While adds three gamerules
+* `maxPlayerThrownItemAge` the amount of ticks an item that was **thrown by a player (using `Q` key by default)** takes to despawn (default: 6000)
+* `maxPlayerDeathItemAge` the amount of ticks an item that was **dropped by a player upon death** takes to despawn (default: 6000)
+* `maxItemAge` the amount of ticks all other dropped items take to despawn (default: 6000)
 
 In case you are unfamiliar with them, **20 ticks == 1 second**  
 Any value less than 0 (i.e. negative values) are interpreted to mean "never despawn"

@@ -12,16 +12,27 @@ public class StayAWhile implements ModInitializer
 	public static final Logger LOGGER = LoggerFactory.getLogger("stay_a_while");
 
 	@Override
-	public void onInitialize() {}
+	public void onInitialize()
+	{
+		LOGGER.info("Successfully initialized!");
+	}
 
-	public static final GameRules.Key<GameRules.IntRule> ITEM_DESPAWN_AGE =
+	public static final GameRules.Key<GameRules.IntRule> MAX_ITEM_AGE =
 			GameRuleRegistry.register(
-					"itemDespawnAge",
+					"maxItemAge",
 					GameRules.Category.MISC,
-					GameRuleFactory.createIntRule(6000));
-	public static final GameRules.Key<GameRules.IntRule> DEATH_ITEM_DESPAWN_AGE =
+					GameRuleFactory.createIntRule(6000)
+			);
+	public static final GameRules.Key<GameRules.IntRule> MAX_PLAYER_THROWN_ITEM_AGE =
 			GameRuleRegistry.register(
-					"deathItemDespawnAge",
+					"maxPlayerThrownItemAge",
 					GameRules.Category.MISC,
-					GameRuleFactory.createIntRule(6000));
+					GameRuleFactory.createIntRule(6000)
+			);
+	public static final GameRules.Key<GameRules.IntRule> MAX_PLAYER_DEATH_ITEM_AGE =
+			GameRuleRegistry.register(
+					"maxPlayerDeathItemAge",
+					GameRules.Category.MISC,
+					GameRuleFactory.createIntRule(6000)
+			);
 }

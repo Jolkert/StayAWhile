@@ -1,4 +1,8 @@
 # Stay A While Changelog
+## Version 1.1.1
+### Bugfixes
+- Fixed a bug where translation strings for gamerules were not being shown properly
+
 ## Version 1.1.0
 ### Additions
 - Added `maxPlayerThrownItemAge` gamerule. Controls number of ticks until items thrown on the by players (using the `Q` key by default) despawn (default: 6000)

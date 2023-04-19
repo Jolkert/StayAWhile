@@ -1,5 +1,5 @@
 # Stay A While
-Have you ever thought that your items disappear to quickly? Or maybe you think its actually too short. Perhaps the normal timer is just fine, but you wish you had just a little more time to collect your tiems after you die. Or maybe you want your items to despawn faster to give death that little extra stress factor.  
+Have you ever thought that your items disappear too quickly? Or maybe you think its actually too short. Perhaps the normal timer is just fine, but you wish you had just a little more time to collect your items after you die. Or maybe you want your items to despawn faster to give death that little extra stress factor.  
 Whichever type of player you are, Stay A While is the mod for you
 
 # What does it do?

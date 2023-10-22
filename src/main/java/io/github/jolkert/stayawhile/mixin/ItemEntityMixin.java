@@ -18,11 +18,11 @@ public class ItemEntityMixin implements ItemEntityInterface
 	@Shadow private int itemAge;
 
 	@Unique	private DropType dropType = DropType.DEFAULT;
-	@Override public void setDropType(DropType dropType)
+	@Override public void stayAWhile$setDropType(DropType dropType)
 	{
 		this.dropType = dropType;
 	}
-	@Override public DropType getDropType()
+	@Override public DropType stayAWhile$getDropType()
 	{
 		return dropType;
 	}
@@ -30,7 +30,7 @@ public class ItemEntityMixin implements ItemEntityInterface
 	@Inject(method = "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V", at = @At("TAIL"))
 	public void setMinimumAgeIfNecessary(EntityType<? extends ItemEntity> entityType, World world, CallbackInfo ci)
 	{
-		setDropType(DropType.DEFAULT);
+		stayAWhile$setDropType(DropType.DEFAULT);
 		if (world.getGameRules().getInt(StayAWhile.MAX_ITEM_AGE) < 0)
 			this.itemAge = Short.MIN_VALUE;
 	}

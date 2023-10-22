@@ -4,6 +4,6 @@ import io.github.jolkert.stayawhile.data.DropType;
 
 public interface ItemEntityInterface
 {
-	void setDropType(DropType dropType);
-	DropType getDropType();
+	void stayAWhile$setDropType(DropType dropType);
+	DropType stayAWhile$getDropType();
 }

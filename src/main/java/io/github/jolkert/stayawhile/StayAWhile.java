@@ -35,4 +35,11 @@ public class StayAWhile implements ModInitializer
 					GameRules.Category.MISC,
 					GameRuleFactory.createIntRule(6000)
 			);
+
+	public static final GameRules.Key<GameRules.IntRule> VILLAGER_CONVERT_PERCENT =
+			GameRuleRegistry.register(
+				"villagerConvertPercent",
+				GameRules.Category.MOBS,
+				GameRuleFactory.createIntRule(100)
+			);
 }

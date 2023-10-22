@@ -23,7 +23,7 @@ public class PlayerInventoryMixin
 		if (itemEntity == null)
 			return null;
 
-		((ItemEntityInterface) itemEntity).setDropType(DropType.PLAYER_DEATH_DROP);
+		((ItemEntityInterface) itemEntity).stayAWhile$setDropType(DropType.PLAYER_DEATH_DROP);
 		// we have to explicitly set it to zero in the case that itemDespawnAge is negative and the constructor set it to min -morgan 2023-04-10
 		short age = itemEntity.getWorld().getGameRules().getInt(StayAWhile.MAX_PLAYER_DEATH_ITEM_AGE) < 0 ? Short.MIN_VALUE : 0;
 		((ItemEntityAccessor) itemEntity).setItemAge(age);

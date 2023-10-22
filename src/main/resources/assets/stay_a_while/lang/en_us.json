@@ -1,5 +1,6 @@
 {
 	"gamerule.maxItemAge": "Ticks before items despawn",
 	"gamerule.maxPlayerThrownItemAge": "Ticks before items thrown by players despawn",
-	"gamerule.maxPlayerDeathItemAge": "Ticks before items dropped on death despawn"
+	"gamerule.maxPlayerDeathItemAge": "Ticks before items dropped on death despawn",
+	"gamerule.villagerConversionPercent": "Percent chance that a villager is converted to a zombie villager"
 }

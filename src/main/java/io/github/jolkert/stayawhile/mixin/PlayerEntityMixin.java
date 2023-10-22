@@ -19,7 +19,7 @@ public class PlayerEntityMixin
 		ItemEntity itemEntity = cir.getReturnValue();
 		if (itemEntity != null)
 		{
-			((ItemEntityInterface) itemEntity).setDropType(DropType.PLAYER_DROPPED);
+			((ItemEntityInterface) itemEntity).stayAWhile$setDropType(DropType.PLAYER_DROPPED);
 			if (DropType.PLAYER_DROPPED.getMaximumAge(itemEntity.getWorld()) < 0)
 				((ItemEntityAccessor) itemEntity).setItemAge(Short.MIN_VALUE);
 		}

@@ -21,7 +21,6 @@ public class ZombieEntityMixin
 	)
 	private Difficulty alwaysPassFirstCheck(ServerWorld __)
 	{
-		System.out.println("bypass gamemode check");
 		return Difficulty.NORMAL;
 	}
 

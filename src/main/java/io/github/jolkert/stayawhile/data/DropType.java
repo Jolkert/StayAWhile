@@ -1,7 +1,7 @@
 package io.github.jolkert.stayawhile.data;
 
 import io.github.jolkert.stayawhile.StayAWhile;
-import net.minecraft.world.World;
+import net.minecraft.server.world.ServerWorld;
 
 public enum DropType
 {
@@ -18,7 +18,7 @@ public enum DropType
 		return this == PLAYER_DEATH_DROP;
 	}
 
-	public int getMaximumAge(World world)
+	public int getMaximumAge(ServerWorld world)
 	{
 		return world.getGameRules().getInt(switch (this)
 				{

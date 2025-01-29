@@ -7,5 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(ItemEntity.class)
 public interface ItemEntityAccessor
 {
-	@Accessor void setItemAge(int age);
+	@Accessor
+	void setItemAge(int age);
 }

@@ -30,14 +30,23 @@ public class ZombieEntityMixin
 	)
 	private boolean shouldConvert(Random random)
 	{
-		int chance = ((ZombieEntity)(Object)this).getEntityWorld().getGameRules().getInt(StayAWhile.VILLAGER_CONVERT_PERCENT);
-
-		// invert because the check returns on true and spawns on false -morg 2023-10-23
-		return !switch (chance)
+		ZombieEntity self = (ZombieEntity) (Object) this;
+		if (self.getEntityWorld() instanceof ServerWorld world)
 		{
-			case 0 -> false;
-			case 100 -> true;
-			default ->  random.nextInt(100) < chance;
-		};
+
+			int chance = world.getGameRules().getInt(StayAWhile.VILLAGER_CONVERT_PERCENT);
+
+			// invert because the check returns on true and spawns on false -morg 2023-10-23
+			return !switch (chance)
+			{
+				case 0 -> false;
+				case 100 -> true;
+				default -> random.nextInt(100) < chance;
+			};
+		}
+		else
+		{
+			return random.nextBoolean();
+		}
 	}
 }

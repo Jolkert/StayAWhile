@@ -7,6 +7,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,16 +18,23 @@ public class PlayerInventoryMixin
 
 	@Redirect(method = "dropAll",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;"))
-	public ItemEntity markAsDeathDrop(PlayerEntity player, ItemStack itemStack, boolean throwRandomly, boolean retainOwnership)
+	public ItemEntity markAsDeathDrop(PlayerEntity player, ItemStack itemStack, boolean throwRandomly,
+									  boolean retainOwnership)
 	{
 		ItemEntity itemEntity = player.dropItem(itemStack, throwRandomly, retainOwnership);
 		if (itemEntity == null)
+		{
 			return null;
+		}
 
 		((ItemEntityInterface) itemEntity).stayAWhile$setDropType(DropType.PLAYER_DEATH_DROP);
 		// we have to explicitly set it to zero in the case that itemDespawnAge is negative and the constructor set it to min -morgan 2023-04-10
-		short age = itemEntity.getWorld().getGameRules().getInt(StayAWhile.MAX_PLAYER_DEATH_ITEM_AGE) < 0 ? Short.MIN_VALUE : 0;
-		((ItemEntityAccessor) itemEntity).setItemAge(age);
+		if (itemEntity.getWorld() instanceof ServerWorld world)
+		{
+			short age = world.getGameRules().getInt(StayAWhile.MAX_PLAYER_DEATH_ITEM_AGE)
+					< 0 ? Short.MIN_VALUE : 0;
+			((ItemEntityAccessor) itemEntity).setItemAge(age);
+		}
 
 		return itemEntity;
 	}

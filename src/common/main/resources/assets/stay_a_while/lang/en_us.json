@@ -1,0 +1,6 @@
+{
+	"gamerule.maxItemAge": "Ticks before items despawn",
+	"gamerule.maxPlayerThrownItemAge": "Ticks before items thrown by players despawn",
+	"gamerule.maxPlayerDeathItemAge": "Ticks before items dropped on player death despawn",
+	"gamerule.scatterDeathItems": "Whether items dropped on player death should randomly scatter"
+}

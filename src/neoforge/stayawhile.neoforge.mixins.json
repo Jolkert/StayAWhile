@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "dev.jolkert.stayawhile.neoforge.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"AdjustLifespanMixin"
+	],
+	"client": [
+
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

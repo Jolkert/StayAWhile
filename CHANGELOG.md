@@ -1,4 +1,13 @@
 # Stay A While Changelog
+# Version 2.0.0
+## Additions
+- Added `scatterDeathItems` gamerule. Controls whether items dropped on player death scatter randomly (default: `false`)
+- Now available on Neoforge!
+## Removals
+- Removed `villagerConversionPercent` gamerule. Will be spun off into its own mod.
+## Bugfixes
+- **Fixed:** Items lose their thrown/death-specific despawn timers upon chunk reload.
+
 ## Version 1.1.1
 ### Bugfixes
 - Fixed a bug where translation strings for gamerules were not being shown properly

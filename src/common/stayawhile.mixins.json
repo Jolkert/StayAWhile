@@ -4,11 +4,10 @@
 	"package": "dev.jolkert.stayawhile.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"DeathDropMixin",
-		"AddDeathDropTagMixin"
+		"AddDeathDropTagMixin",
+		"DeathDropMixin"
 	],
 	"client": [
-
 	],
 	"injectors": {
 		"defaultRequire": 1

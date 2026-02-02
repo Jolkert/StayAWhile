@@ -62,7 +62,9 @@ cloche {
 		}
 
 		runs {
-			server()
+			server {
+				args("nogui")
+			}
 			client {
 				setUsernameAndUuid()
 			}

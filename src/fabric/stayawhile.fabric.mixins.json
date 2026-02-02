@@ -7,7 +7,6 @@
 		"FixDeleteTimeMixin"
 	],
 	"client": [
-
 	],
 	"injectors": {
 		"defaultRequire": 1

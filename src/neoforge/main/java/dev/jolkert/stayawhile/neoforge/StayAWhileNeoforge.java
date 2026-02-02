@@ -38,6 +38,8 @@ public class StayAWhileNeoforge
 				GameRules.Category.DROPS,
 				GameRules.BooleanValue.create(false)
 		);
+
+		StayAWhile.POST_DEATH = item -> item.lifespan = DropType.PLAYER_DEATH_DROP.maxAge(item.level());
 	}
 
 	@SubscribeEvent
@@ -46,7 +48,8 @@ public class StayAWhileNeoforge
 		ItemEntity entity = event.getEntity();
 		int maxAge = DropType.from(entity).maxAge(entity.level());
 
-		if (maxAge < 0) {
+		if (maxAge < 0)
+		{
 			entity.setUnlimitedLifetime();
 		}
 		else if (entity.getAge() < maxAge)

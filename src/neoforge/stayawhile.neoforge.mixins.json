@@ -7,7 +7,6 @@
 		"AdjustLifespanMixin"
 	],
 	"client": [
-
 	],
 	"injectors": {
 		"defaultRequire": 1

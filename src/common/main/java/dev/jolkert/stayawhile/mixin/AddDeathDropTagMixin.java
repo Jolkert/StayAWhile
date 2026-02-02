@@ -36,6 +36,7 @@ public class AddDeathDropTagMixin
 				includeThrowerName
 		);
 		((ItemEntityDuck) entity).stayawhile$setDeathDrop(true);
+		StayAWhile.POST_DEATH.accept(entity);
 		return entity;
 	}
 }

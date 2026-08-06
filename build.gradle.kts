@@ -1,115 +1,140 @@
 import net.msrandom.minecraftcodev.runs.MinecraftRunConfiguration
 
-plugins {
-	id("earth.terrarium.cloche") version "0.17.7"
+// ig cloche is busted (https://github.com/terrarium-earth/cloche/issues/157) -morgan 2026-07-29
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
 }
 
+plugins {
+	id("earth.terrarium.cloche") version "0.19.13"
+}
+
+group = "dev.jolkert"
+version = "2.1.0"
+
 repositories {
+	cloche.main()
 	cloche.librariesMinecraft()
-
 	mavenCentral()
-
 	cloche {
-		main()
-
 		mavenFabric()
 		mavenNeoforgedMeta()
 		mavenNeoforged()
-
 		mavenParchment()
 	}
+
+	maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // Mod Menu
 }
 
 cloche {
-	minecraftVersion = "1.21.1"
-
 	metadata {
 		modId = "stay_a_while"
-		name = "Stay A While"
-		license = "GPL-3.0"
-		description = "Customize item despawn times"
+		name = "Stay a While"
+		description = "Customize item despawn times!"
 		icon = "assets/stay_a_while/icon.png"
-
 		author("jolkert")
+		license = "GPL-3.0"
 	}
 
-	mappings {
-		official()
-		parchment("2024.11.17")
-	}
-
-	dependencies {
-	}
-
-	val mixinExtrasVersion = "0.5.3"
-	val mixinExtrasPath = "io.github.llamalad7:mixinextras"
-
-	neoforge {
-		loaderVersion = "21.1.135"
+	common {
 		metadata {
-			mixins.from("src/common/stayawhile.mixins.json")
-			mixins.from("src/neoforge/stayawhile.neoforge.mixins.json")
-		}
-
-		data()
-
-		dependencies {
-			val mixinExtrasNeoforge = "$mixinExtrasPath-neoforge:$mixinExtrasVersion"
-
-			include(mixinExtrasNeoforge)
-			implementation(mixinExtrasNeoforge)
-			annotationProcessor(mixinExtrasNeoforge)
-		}
-
-		runs {
-			server {
-				args("nogui")
-			}
-			client {
-				setUsernameAndUuid()
-			}
-			data()
+			mixins.from("src/common/main/stay_a_while.common.mixins.json")
 		}
 	}
 
-	fabric {
-		loaderVersion = "0.16.10"
-		val fabricApiVersion = "0.115.2"
+	val latestVersion = "26.2" // Fabric Only
+	val ltsVersion = "1.21.1" // Fabric & Neoforge
+
+	val commonLts = common("common:$ltsVersion") {
+		metadata {
+			mixins.from("src/common/$ltsVersion/main/stay_a_while.common-$ltsVersion.mixins.json")
+		}
+	}
+	val commonFabric = common("fabric:common") {
+		metadata {
+			mixins.from("src/fabric/common/main/stay_a_while.common-fabric.mixins.json")
+		}
+	}
+
+	// ------------------------------------------
+	// | FABRIC (https://fabricmc.net/develop/) |
+	// ------------------------------------------
+	fabric("fabric:$latestVersion") {
+		dependsOn(commonFabric)
+		minecraftVersion = latestVersion
+		loaderVersion = "0.19.3"
+		includedClient()
 
 		metadata {
 			entrypoint("main", "dev.jolkert.stayawhile.fabric.StayAWhileFabric")
-			mixins.from("src/common/stayawhile.mixins.json")
-			mixins.from("src/fabric/stayawhile.fabric.mixins.json")
-
-			dependency("minecraft", minecraftVersion.get())
-			dependency {
-				modId = "fabric"
-			}
+			mixins.from("src/fabric/$latestVersion/main/stay_a_while.fabric-$latestVersion.mixins.json")
 		}
 
-		data()
-		
-		client {
-			tasks.named<Jar>(sourceSet.jarTaskName) {
-				duplicatesStrategy = DuplicatesStrategy.INCLUDE
-			}
-		}
-
+		val modMenuVersion = "20.0.1"
 		dependencies {
-			fabricApi(fabricApiVersion)
-			val mixinExtrasFabric = "$mixinExtrasPath-fabric:$mixinExtrasVersion"
-
-			include(mixinExtrasFabric)
-			implementation(mixinExtrasFabric)
-			annotationProcessor(mixinExtrasFabric)
+			fabricApi("0.156.0")
+			runtimeOnly("com.terraformersmc:modmenu:$modMenuVersion")
 		}
 
 		runs {
 			server()
-			client {
+			client() {
 				setUsernameAndUuid()
 			}
-			data()
+		}
+	}
+
+	fabric("fabric:$ltsVersion") {
+		dependsOn(commonLts)
+		dependsOn(commonFabric)
+
+		minecraftVersion = ltsVersion
+		loaderVersion = "0.19.3"
+		includedClient()
+		mappings {
+			official()
+			parchment("2024.11.17") // https://parchmentmc.org/docs/getting-started.html
+		}
+
+		metadata {
+			entrypoint("main", "dev.jolkert.stayawhile.fabric.StayAWhileFabric")
+		}
+
+		val modMenuVersion = "11.0.4"
+		dependencies {
+			fabricApi("0.116.15")
+			modImplementation("com.terraformersmc:modmenu:$modMenuVersion")
+		}
+
+		runs {
+			server()
+			client() {
+				setUsernameAndUuid()
+			}
+		}
+
+	}
+
+	// -------------------------------------
+	// | NEOFORGE (https://neoforged.net/) |
+	// -------------------------------------
+	neoforge {
+		dependsOn(commonLts)
+
+		minecraftVersion = ltsVersion
+		loaderVersion = "21.1.244"
+		mappings {
+			official()
+			parchment("2024.11.17") // https://parchmentmc.org/docs/getting-started.html
+		}
+
+		runs {
+			server()
+			client() {
+				setUsernameAndUuid()
+			}
 		}
 	}
 }

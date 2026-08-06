@@ -2,51 +2,44 @@ package dev.jolkert.stayawhile.neoforge;
 
 import dev.jolkert.stayawhile.DropType;
 import dev.jolkert.stayawhile.StayAWhile;
+import dev.jolkert.stayawhile.StayAWhileCommonLts;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
 
-@Mod("stay_a_while")
+
+@Mod(StayAWhile.MOD_ID)
 @EventBusSubscriber
 public class StayAWhileNeoforge
 {
 	public StayAWhileNeoforge()
 	{
-		StayAWhile.MAX_ITEM_AGE = GameRules.register(
-				"maxItemAge",
-				GameRules.Category.DROPS,
-				GameRules.IntegerValue.create(6000)
-		);
-
-		StayAWhile.MAX_PLAYER_THROWN_ITEM_AGE = GameRules.register(
-				"maxPlayerThrownItemAge",
-				GameRules.Category.DROPS,
-				GameRules.IntegerValue.create(6000)
-		);
-
-		StayAWhile.MAX_PLAYER_DEATH_ITEM_AGE = GameRules.register(
-				"maxPlayerDeathItemAge",
-				GameRules.Category.DROPS,
-				GameRules.IntegerValue.create(-1)
-		);
-
-		StayAWhile.SCATTER_DEATH_ITEMS = GameRules.register(
-				"scatterDeathItems",
-				GameRules.Category.DROPS,
-				GameRules.BooleanValue.create(false)
-		);
-
-		StayAWhile.POST_DEATH = item -> item.lifespan = DropType.PLAYER_DEATH_DROP.maxAge(item.level());
+		StayAWhileCommonLts.init(item -> {
+			Level world = item.level();
+			if (!world.isClientSide())
+			{
+				// i kinda dont like this function call? it feels weird to call a function that depends on the interface
+				// from the function going into the function -morgan 2026-08-05
+				item.lifespan = StayAWhile.maxItemAge(DropType.PLAYER_DEATH_DROP, (ServerLevel) world);
+			}
+		});
 	}
 
 	@SubscribeEvent
 	static void onItemExpire(ItemExpireEvent event)
 	{
+		if (!(event.getEntity().level() instanceof ServerLevel world))
+		{
+			return;
+		}
+
 		ItemEntity entity = event.getEntity();
-		int maxAge = DropType.from(entity).maxAge(entity.level());
+
+		int maxAge = StayAWhile.maxItemAge(DropType.from(entity), world);
 
 		if (maxAge < 0)
 		{
@@ -58,4 +51,3 @@ public class StayAWhileNeoforge
 		}
 	}
 }
-

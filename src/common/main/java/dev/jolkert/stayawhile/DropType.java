@@ -26,13 +26,4 @@ public enum DropType
 		}
 	}
 
-	public int maxAge(Level world)
-	{
-		return world.getGameRules().getInt(switch (this)
-		{
-			case DEFAULT -> StayAWhile.MAX_ITEM_AGE;
-			case PLAYER_THROWN -> StayAWhile.MAX_PLAYER_THROWN_ITEM_AGE;
-			case PLAYER_DEATH_DROP -> StayAWhile.MAX_PLAYER_DEATH_ITEM_AGE;
-		});
-	}
 }

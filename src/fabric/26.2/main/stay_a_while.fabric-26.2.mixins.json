@@ -1,13 +1,11 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "dev.jolkert.stayawhile.mixin",
+	"package": "dev.jolkert.stayawhile.fabric.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"AddDeathDropTagMixin",
-		"DeathDropMixin"
-	],
-	"client": [
+		"AddDeathDropToEquipmentMixin",
+		"DropTypeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,8 +1,13 @@
-package dev.jolkert.stayawhile.mixin;
+package dev.jolkert.stayawhile.fabric.mixin;
+
 
 import dev.jolkert.stayawhile.duck.ItemEntityDuck;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -11,14 +16,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 @Mixin(ItemEntity.class)
-public class DeathDropMixin implements ItemEntityDuck
+public class DropTypeMixin implements ItemEntityDuck
 {
 	@Shadow
 	@Nullable
-	private UUID thrower;
+	private EntityReference<Entity> thrower;
 
 	@Unique
 	private boolean stayawhile$playerDropped = false;
@@ -43,17 +47,16 @@ public class DeathDropMixin implements ItemEntityDuck
 
 
 	@Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-	void addDeathDropStatus(CompoundTag compound, CallbackInfo ci)
+	void addDeathDropStatus(ValueOutput output, CallbackInfo ci)
 	{
-		compound.putBoolean("DeathDrop", stayawhile$playerDropped);
+		output.putBoolean("DeathDrop", stayawhile$playerDropped);
 	}
 
+
 	@Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-	void readDeathDropStatus(CompoundTag compound, CallbackInfo ci)
+	void readDeathDropStatus(ValueInput input, CallbackInfo ci)
 	{
-		if (compound.contains("DeathDrop"))
-		{
-			this.stayawhile$setDeathDrop(compound.getBoolean("DeathDrop"));
-		}
+		var self = (ItemEntityDuck) (ItemEntity) (Object) this;
+		self.stayawhile$setDeathDrop(input.getBooleanOr("DeathDrop", false));
 	}
 }

@@ -1,0 +1,6 @@
+{
+	"gamerule.stay_a_while.item_despawn_time": "Ticks before items despawn",
+	"gamerule.stay_a_while.thrown_item_despawn_time": "Ticks before items thrown by players despawn",
+	"gamerule.stay_a_while.death_drop_despawn_time": "Ticks before items dropped on player death despawn",
+	"gamerule.stay_a_while.scatter_death_drops": "Whether items dropped on player death should randomly scatter"
+}

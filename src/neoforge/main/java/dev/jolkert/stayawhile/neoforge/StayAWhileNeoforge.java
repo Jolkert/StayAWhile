@@ -5,6 +5,7 @@ import dev.jolkert.stayawhile.StayAWhile;
 import dev.jolkert.stayawhile.StayAWhileCommonLts;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -27,6 +28,27 @@ public class StayAWhileNeoforge
 				item.lifespan = StayAWhile.maxItemAge(DropType.PLAYER_DEATH_DROP, (ServerLevel) world);
 			}
 		});
+
+		StayAWhileCommonLts.MAX_ITEM_AGE = GameRules.register(
+			"itemDespawnTime",
+			GameRules.Category.DROPS,
+			GameRules.IntegerValue.create(6000)
+		);
+		StayAWhileCommonLts.MAX_PLAYER_THROWN_ITEM_AGE = GameRules.register(
+			"thrownItemDespawnTime",
+			GameRules.Category.DROPS,
+			GameRules.IntegerValue.create(6000)
+		);
+		StayAWhileCommonLts.MAX_PLAYER_DEATH_ITEM_AGE = GameRules.register(
+			"deathDropDespawnTime",
+			GameRules.Category.DROPS,
+			GameRules.IntegerValue.create(-1)
+		);
+		StayAWhileCommonLts.SCATTER_DEATH_ITEMS = GameRules.register(
+			"scatterDeathDrops",
+			GameRules.Category.DROPS,
+			GameRules.BooleanValue.create(false)
+		);
 	}
 
 	@SubscribeEvent

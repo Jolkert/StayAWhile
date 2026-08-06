@@ -30,7 +30,7 @@ public class StayAWhileFabric implements ModInitializer
 			GameRuleFactory.createIntRule(-1)
 		);
 		StayAWhileCommonLts.SCATTER_DEATH_ITEMS = GameRuleRegistry.register(
-			"scatterDeathItems",
+			"scatterDeathDrops",
 			GameRules.Category.DROPS,
 			GameRuleFactory.createBooleanRule(false)
 		);

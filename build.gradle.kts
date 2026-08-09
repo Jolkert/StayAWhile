@@ -8,7 +8,7 @@ java {
 }
 
 plugins {
-	id("earth.terrarium.cloche") version "0.19.13"
+	id("earth.terrarium.cloche") version "0.19.11"
 }
 
 group = "dev.jolkert"
@@ -70,6 +70,9 @@ cloche {
 		metadata {
 			entrypoint("main", "dev.jolkert.stayawhile.fabric.StayAWhileFabric")
 			mixins.from("src/fabric/$latestVersion/main/stay_a_while.fabric-$latestVersion.mixins.json")
+			dependency {
+				modId = "fabric-api"
+			}
 		}
 
 		val modMenuVersion = "20.0.1"
@@ -100,6 +103,9 @@ cloche {
 
 		metadata {
 			entrypoint("main", "dev.jolkert.stayawhile.fabric.StayAWhileFabric")
+			dependency {
+				modId = "fabric"
+			}
 		}
 
 		val modMenuVersion = "11.0.4"

@@ -130,6 +130,10 @@ cloche {
 			parchment("2024.11.17") // https://parchmentmc.org/docs/getting-started.html
 		}
 
+		metadata {
+			mixins.from("src/neoforge/main/stay_a_while.neoforge.mixins.json")
+		}
+
 		runs {
 			server()
 			client() {

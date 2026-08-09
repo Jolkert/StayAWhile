@@ -1,4 +1,18 @@
 # Stay A While Changelog
+# Version 3.0.0
+## Changes
+- **BREAKING:** renamed all gamerules on 1.21.1 to be more intuitively named. You will have to reset your gamerules on update.
+	- `maxItemage` -> `itemDespawnTime`
+	- `maxPlayerThrownItemAge` -> `thrownItemDespawnTime`
+	- `maxPlayerThrownItemAge` -> `deathDropDespawnTime`
+	- `scatterDeathItems` -> `scatterDeathDrops`
+## Additions
+- Now available on 26.2 (Fabric)!
+- All gamerules named differently on 26.2 for consistency with vanilla gamerule names
+	- `itemDespawnTime` == `stay_a_while:item_despawn_time` 
+	- `thrownItemDespawnTime` == `stay_a_while:thrown_item_despawn_time`
+	- `deathDropDespawnTime` == `stay_a_while:thrown_item_despawn_time`
+	- `scatterDeathDrops` == `stay_a_while:scatter_death_drops`
 # Version 2.0.0
 ## Additions
 - Added `scatterDeathItems` gamerule. Controls whether items dropped on player death scatter randomly (default: `false`)

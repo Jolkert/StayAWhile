@@ -8,7 +8,7 @@ java {
 }
 
 plugins {
-	id("earth.terrarium.cloche") version "0.19.11"
+	id("earth.terrarium.cloche") version "0.19.13"
 }
 
 group = "dev.jolkert"

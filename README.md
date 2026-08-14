@@ -1,11 +1,7 @@
-# Stay A While
+# Stay a While
 
-Have you ever thought that your items disappear too quickly? Perhaps the normal timer is just fine, but you wish you had
-just a little more time to collect your items after you die. Or maybe you want your items to despawn faster to give death
-that little extra stress factor. You might also hate it when you die and your items scatter everywhere.
-If any of these things sound like you, Stay A While can help with that.
-
-# What does it do?
+Stay a While allows you to customize the amount of time it takes for items on the ground to despawn, and allows for
+customization based on how the item was dropped. It makes items dropped on death not randomly scatter on the ground.
 
 By default, Stay A While makes items dropped upon death never despawn and not scatter randomly.
 Additionally, it adds 4 new gamerules to customize behavior:
@@ -21,18 +17,23 @@ Additionally, it adds 4 new gamerules to customize behavior:
 In case you are unfamiliar with them, **20 ticks == 1 second** : 1200 ticks == 1 minute : 6000 ticks == 5 minutes  
 Values less than 0 (i.e. negative values) on the despawn time gamerules are make their category of items never despawn
 
-# Other questions you might want answers to
+## Works Fully Serverside
 
-## Does this work on servers?
+In multiplayer, the mod **only needs to be installed on the server to function**, and players without the mod installed are able to connect to servers with the mod installed.
 
-Yes! Just install on the server and you're good to go. No players need to install!
+## Version Policy
 
-## What if I change the value while items are still on the ground?
+As with most of my mods, the plan is to keep Stay a While on 1.21.1 Neoforge & Fabric
+for as long as 1.21.1 is a prominent version for modpacks, and continue pushing
+updates for the version of Minecraft on Fabric.
 
-If the max age is **raised** while the item is still alive, it will **always follow the new lifespan**, extending the life of the item.  
-If the max age is **lowered** while the item is still alive, the behavior currently **differs between modloaders**:
+As the "long-term-support" version, 1.21.1 is the only Minecraft version
+older than Latest Release which will be receiving new versions of the mod.
 
-- On Fabric: items begin checking against the new age immediately, so the item's lifespan is **reduced** upon changing
-  the gamerule
-- On Neoforge: items only begin checking against the new age if they attempt to despawn, so the item's lifespan is **unaffected**,
-  continuing to follow the previous timer
+## Bug Reports
+
+If you find any bugs, please report them to the [codeberg repo](https://codeberg.org/jolkert//issues)
+
+## Modpacks
+
+As with all of my mods, you may include Stay a While in any modpack.

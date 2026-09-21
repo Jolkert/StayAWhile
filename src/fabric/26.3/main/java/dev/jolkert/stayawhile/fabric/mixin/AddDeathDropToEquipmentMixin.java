@@ -17,16 +17,16 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(EntityEquipment.class)
 public class AddDeathDropToEquipmentMixin
 {
-	@WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;"))
+	@WrapOperation(method = "dropAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;createItemStackToDrop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;"))
 	ItemEntity addDeathDropTag(
 		LivingEntity instance,
-		ItemStack droppedItem,
+		ItemStack itemStack,
 		boolean randomly,
 		boolean thrownFromHand,
 		Operation<ItemEntity> original
 	)
 	{
-		ItemEntity entity = original.call(instance, droppedItem, randomly, thrownFromHand);
+		ItemEntity entity = original.call(instance, itemStack, randomly, thrownFromHand);
 		if (instance instanceof Player)
 		{
 			((ItemEntityDuck) entity).stayawhile$setDeathDrop(true);

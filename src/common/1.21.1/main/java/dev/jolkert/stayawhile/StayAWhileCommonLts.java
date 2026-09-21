@@ -2,7 +2,6 @@ package dev.jolkert.stayawhile;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 
 import java.util.function.Consumer;
@@ -40,11 +39,13 @@ public class StayAWhileCommonLts
 
 	public static int maxItemAge(DropType dropType, ServerLevel world)
 	{
-		return world.getGameRules().getInt(switch (dropType)
+		return dropType == DropType.FAKE ? 6000 : world.getGameRules().getInt(switch (dropType)
 		{
 			case DropType.DEFAULT -> StayAWhileCommonLts.MAX_ITEM_AGE;
 			case DropType.PLAYER_THROWN -> StayAWhileCommonLts.MAX_PLAYER_THROWN_ITEM_AGE;
 			case DropType.PLAYER_DEATH_DROP -> StayAWhileCommonLts.MAX_PLAYER_DEATH_ITEM_AGE;
+			// the truthy arm covers this case -jolkert 2026-09-21
+			case DropType.FAKE -> throw new UnsupportedOperationException();
 		});
 	}
 }

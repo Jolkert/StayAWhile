@@ -66,11 +66,13 @@ public class StayAWhileFabric implements ModInitializer
 
 	public static int getMaxItemAge(DropType dropType, ServerLevel world)
 	{
-		return world.getGameRules().get(switch (dropType)
+		return dropType == DropType.FAKE ? 6000 : world.getGameRules().get(switch (dropType)
 		{
 			case DropType.DEFAULT -> StayAWhileFabric.MAX_ITEM_AGE;
 			case DropType.PLAYER_THROWN -> StayAWhileFabric.MAX_PLAYER_THROWN_ITEM_AGE;
 			case DropType.PLAYER_DEATH_DROP -> StayAWhileFabric.MAX_PLAYER_DEATH_ITEM_AGE;
+			// the truthy arm covers this case -jolkert 2026-09-21
+			case DropType.FAKE -> throw new UnsupportedOperationException();
 		});
 	}
 }

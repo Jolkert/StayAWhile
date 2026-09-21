@@ -2,12 +2,12 @@ package dev.jolkert.stayawhile.fabric.mixin;
 
 
 import dev.jolkert.stayawhile.duck.ItemEntityDuck;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -23,6 +23,13 @@ public class DropTypeMixin implements ItemEntityDuck
 	@Shadow
 	@Nullable
 	private EntityReference<Entity> thrower;
+
+	@Shadow
+	private int pickupDelay;
+
+	@Shadow
+	@Final
+	private static int INFINITE_PICKUP_DELAY;
 
 	@Unique
 	private boolean stayawhile$playerDropped = false;
@@ -43,6 +50,12 @@ public class DropTypeMixin implements ItemEntityDuck
 	public boolean stayawhile$wasThrown()
 	{
 		return this.thrower != null;
+	}
+
+	@Override
+	public boolean stayawhile$hasInfinitePickup()
+	{
+		return this.pickupDelay == INFINITE_PICKUP_DELAY;
 	}
 
 

@@ -8,7 +8,8 @@ public enum DropType
 {
 	DEFAULT,
 	PLAYER_THROWN,
-	PLAYER_DEATH_DROP;
+	PLAYER_DEATH_DROP,
+	FAKE;
 
 	public static DropType from(ItemEntity item)
 	{
@@ -19,6 +20,10 @@ public enum DropType
 		else if (((ItemEntityDuck) item).stayawhile$isDeathDrop())
 		{
 			return DropType.PLAYER_DEATH_DROP;
+		}
+		else if (((ItemEntityDuck)item).stayawhile$hasInfinitePickup())
+		{
+			return DropType.FAKE;
 		}
 		else
 		{

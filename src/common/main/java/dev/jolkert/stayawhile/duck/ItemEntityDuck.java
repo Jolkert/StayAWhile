@@ -7,4 +7,6 @@ public interface ItemEntityDuck
 	void stayawhile$setDeathDrop(boolean deathDrop);
 
 	boolean stayawhile$wasThrown();
+
+	boolean stayawhile$hasInfinitePickup();
 }

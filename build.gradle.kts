@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "dev.jolkert"
-version = "3.0.0"
+version = "3.0.1"
 
 repositories {
 	cloche.main()
@@ -38,13 +38,7 @@ cloche {
 		license = "GPL-3.0"
 	}
 
-	common {
-		metadata {
-			mixins.from("src/common/main/stay_a_while.common.mixins.json")
-		}
-	}
-
-	val latestVersion = "26.2" // Fabric Only
+	val latestVersion = "26.3" // Fabric Only
 	val ltsVersion = "1.21.1" // Fabric & Neoforge
 
 	val commonLts = common("common:$ltsVersion") {
@@ -75,9 +69,9 @@ cloche {
 			}
 		}
 
-		val modMenuVersion = "20.0.1"
+		val modMenuVersion = "21.0.0-beta.1"
 		dependencies {
-			fabricApi("0.156.0")
+			fabricApi("0.161.0")
 			runtimeOnly("com.terraformersmc:modmenu:$modMenuVersion")
 		}
 

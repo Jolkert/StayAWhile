@@ -33,11 +33,14 @@ public class AddDeathDropTagMixin
 	)
 	{
 		ItemEntity entity = original.call(instance, droppedItem, dropAround, includeThrowerName);
-		((ItemEntityDuck) entity).stayawhile$setDeathDrop(true);
-		StayAWhile.postDeath(entity);
-		if (entity.level() instanceof ServerLevel serverLevel && !StayAWhile.scatterDrops(serverLevel))
+		if (entity != null)
 		{
-			entity.setDeltaMovement(Vec3.ZERO);
+			((ItemEntityDuck) entity).stayawhile$setDeathDrop(true);
+			StayAWhile.postDeath(entity);
+			if (entity.level() instanceof ServerLevel serverLevel && !StayAWhile.scatterDrops(serverLevel))
+			{
+				entity.setDeltaMovement(Vec3.ZERO);
+			}
 		}
 
 		return entity;

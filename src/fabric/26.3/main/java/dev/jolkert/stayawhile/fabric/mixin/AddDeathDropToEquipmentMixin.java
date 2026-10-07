@@ -27,7 +27,7 @@ public class AddDeathDropToEquipmentMixin
 	)
 	{
 		ItemEntity entity = original.call(instance, itemStack, randomly, thrownFromHand);
-		if (instance instanceof Player)
+		if (instance instanceof Player && entity != null)
 		{
 			((ItemEntityDuck) entity).stayawhile$setDeathDrop(true);
 			StayAWhile.postDeath(entity);

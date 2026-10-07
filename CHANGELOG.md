@@ -1,8 +1,11 @@
 # Stay A While Changelog
+# Version 3.0.2
+## Bugfixes
+- **Fixed:** [#5](https://codeberg.org/jolkert/stay-a-while/issues/5) Curse of Vanishing causes server crash
 # Version 3.0.1
 ## Bugfixes
-- **Fixed:** [#4](https://codeberg.org/jolkert/stay-a-while/issues/4) (`/give` command spawns an uncollectable item when
-the item death time is set too high)
+- **Fixed:** [#4](https://codeberg.org/jolkert/stay-a-while/issues/4) `/give` command spawns an uncollectable item when
+the item death time is set too high
 # Version 3.0.0
 ## Changes
 - **BREAKING:** renamed all gamerules on 1.21.1 to be more intuitively named. You will have to reset your gamerules on update.
